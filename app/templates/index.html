@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pelagic Revenue Rescue</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">PELAGIC <span>AUTOMATIONS</span></div>
+      <h1>Revenue Rescue Command Center</h1>
+      <p>Lead response, follow-up, booking, and recovery.</p>
+    </div>
+    <div class="status {{ 'live' if ghl_enabled else 'demo' }}">
+      {{ 'HighLevel LIVE' if ghl_enabled else 'DEMO MODE' }}
+    </div>
+  </header>
+
+  <main>
+    <section class="metrics">
+      <article><small>Active clients</small><strong>{{ clients|length }}</strong></article>
+      <article><small>Hot leads</small><strong>{{ hot }}</strong></article>
+      <article><small>Bookings</small><strong>{{ booked }}</strong></article>
+      <article><small>Pending follow-ups</small><strong>{{ pending }}</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2>Lead Pipeline</h2><p>Latest 50 leads across Pelagic clients.</p></div>
+        <a class="button" href="/onboarding">+ Add Client</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Lead</th><th>Service</th><th>Intent</th><th>Urgency</th><th>Stage</th><th>Source</th></tr></thead>
+          <tbody>
+          {% for lead in leads %}
+            <tr>
+              <td><b>{{ lead.name or 'Unknown' }}</b><br><small>{{ lead.phone }}</small></td>
+              <td>{{ lead.service_requested or '—' }}</td>
+              <td><span class="pill {{ lead.intent }}">{{ lead.intent }}</span></td>
+              <td>{{ lead.urgency }}</td>
+              <td>{{ lead.stage }}</td>
+              <td>{{ lead.source }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="6" class="empty">No leads yet. Add a client, then send a test lead through the API.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Clients</h2>
+      <div class="client-grid">
+      {% for c in clients %}
+        <article class="client">
+          <small>CLIENT #{{ c.id }}</small>
+          <h3>{{ c.business_name }}</h3>
+          <p>{{ c.services }}</p>
+          <p class="muted">{{ c.service_area }}</p>
+        </article>
+      {% else %}
+        <p class="empty">No clients configured.</p>
+      {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
