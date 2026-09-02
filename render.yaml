@@ -4,12 +4,6 @@ services:
     runtime: python
     region: oregon
     plan: 0.5c-512mb
-
-    # IMPORTANT:
-    # The GitHub repo contains the application inside this folder.
-    # This fixes: ModuleNotFoundError: No module named 'app'
-    rootDir: pelagic-revenue-rescue-mvp
-
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
@@ -21,61 +15,46 @@ services:
       sizeGB: 1
 
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.8
-
       - key: PELAGIC_ENV
         value: production
-
       - key: DATABASE_PATH
         value: /var/data/pelagic.db
 
       - key: PELAGIC_ADMIN_TOKEN
         generateValue: true
-
       - key: PELAGIC_WEBHOOK_SECRET
         generateValue: true
 
-      # Real HighLevel messages remain OFF until we finish testing.
+      # Keep real HighLevel messaging OFF until setup is complete.
       - key: GHL_ENABLED
         value: "false"
-
       - key: GHL_API_BASE
         value: https://services.leadconnectorhq.com
-
       - key: GHL_API_VERSION
         value: v3
 
+      # Enter these securely in Render after deployment.
       - key: GHL_PRIVATE_TOKEN
         sync: false
-
       - key: GHL_LOCATION_ID
         sync: false
-
       - key: GHL_PIPELINE_ID
         sync: false
-
       - key: GHL_STAGE_NEW
         sync: false
-
       - key: GHL_STAGE_QUALIFIED
         sync: false
-
       - key: GHL_STAGE_BOOKED
         sync: false
-
       - key: GHL_STAGE_ESTIMATE
         sync: false
-
       - key: GHL_STAGE_WON
         sync: false
-
       - key: GHL_FROM_NUMBER
         sync: false
 
       - key: OPENAI_API_KEY
         sync: false
-
       - key: OPENAI_MODEL
         value: gpt-5-mini
 
@@ -84,18 +63,11 @@ services:
     runtime: python
     region: oregon
     plan: 0.5c-512mb
-
-    # Same nested app folder as the web service.
-    rootDir: pelagic-revenue-rescue-mvp
-
     schedule: "*/10 * * * *"
     buildCommand: pip install httpx==0.28.1
     startCommand: python scripts/run_followups.py
 
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.8
-
       - key: PELAGIC_TARGET_HOSTPORT
         fromService:
           name: pelagic-revenue-rescue
