@@ -1,0 +1,28 @@
+{
+  "phase_1_local": [
+    "Copy .env.example to .env",
+    "Set a new PELAGIC_ADMIN_TOKEN",
+    "Install requirements",
+    "Run seed demo",
+    "Run tests",
+    "Start FastAPI and inspect dashboard"
+  ],
+  "phase_2_highlevel": [
+    "Create Pelagic private integration for first internal sub-account",
+    "Give only needed contact/conversation/opportunity scopes",
+    "Set GHL IDs and token",
+    "Expose HTTPS webhook URL",
+    "Configure webhook events",
+    "Configure Estimate Sent custom webhook",
+    "Test from a fresh contact"
+  ],
+  "phase_3_sellable": [
+    "Create per-client credentials/OAuth",
+    "Connect Stripe",
+    "Add Snapshot provisioning",
+    "Add calendar booking API actions",
+    "Add review workflow",
+    "Add reporting by client",
+    "Add production queue/logging"
+  ]
+}

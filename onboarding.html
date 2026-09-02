@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pelagic Client Onboarding</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main class="narrow">
+    <a href="/" class="back">← Dashboard</a>
+    <div class="eyebrow">PELAGIC AUTOMATIONS</div>
+    <h1>Revenue Rescue Onboarding</h1>
+    <p class="lead">Configure one home-service client. This creates the business profile the AI uses to qualify and respond to leads.</p>
+
+    <form id="onboard" class="panel form">
+      <label>Business name<input name="business_name" required placeholder="South Bay Plumbing"></label>
+      <div class="two">
+        <label>Phone<input name="phone" placeholder="+13105550123"></label>
+        <label>Email<input name="email" type="email" placeholder="owner@company.com"></label>
+      </div>
+      <label>Service area<textarea name="service_area" placeholder="Torrance, Redondo Beach, Carson, Lomita"></textarea></label>
+      <label>Services offered<textarea name="services" placeholder="Leak repair, drain cleaning, water heaters"></textarea></label>
+      <label>Services not offered<textarea name="services_not_offered" placeholder="Septic pumping, major excavation"></textarea></label>
+      <label>Business hours<input name="business_hours" placeholder="Mon-Fri 7am-6pm; Sat 8am-2pm"></label>
+      <label>Booking URL<input name="booking_url" placeholder="https://..."></label>
+      <label>Emergency policy<textarea name="emergency_policy" placeholder="For gas leaks call utility/emergency services first..."></textarea></label>
+      <label>Financing info<textarea name="financing_info"></textarea></label>
+      <label>Current promotions<textarea name="promotions"></textarea></label>
+
+      <label>Admin token<input id="token" type="password" required placeholder="From PELAGIC_ADMIN_TOKEN"></label>
+      <button type="submit">Create Client Configuration</button>
+      <div id="result"></div>
+    </form>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
